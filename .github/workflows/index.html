@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Lakshmii</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(#3a0c3c, #ffd1dc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Twinkling stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite;
+}
+@keyframes twinkle {
+    0%,100% { opacity:0.2; }
+    50% { opacity:1; }
+}
+
+/* Shooting star */
+.shooting-star {
+    position: absolute;
+    width: 3px;
+    height: 80px;
+    background: linear-gradient(white, transparent);
+    transform: rotate(45deg);
+    opacity: 0;
+    animation: shoot 2s ease-in-out forwards;
+}
+@keyframes shoot {
+    0% { transform: translate(0,0) rotate(45deg); opacity:1; }
+    100% { transform: translate(800px,-400px) rotate(45deg); opacity:0; }
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.95);
+    width: 90%;
+    max-width: 450px;
+    padding: 28px;
+    border-radius: 26px;
+    text-align: center;
+    border: 2px solid #d4af37;
+    box-shadow: 0 20px 50px rgba(212,175,55,0.5);
+    transform: scale(0);
+    opacity: 0;
+    animation: reveal 1s forwards 0.5s;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+/* Glow text */
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #c2185b;
+    text-shadow: 0 0 10px #ff85a2, 0 0 20px #ff4081;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #ff85a2, 0 0 10px #ff4081; }
+    100% { text-shadow: 0 0 15px #ffb3c6, 0 0 30px #ff4081; }
+}
+
+h2 { color: #d4af37; }
+
+@keyframes reveal {
+    0% { transform: scale(0); opacity:0; }
+    100% { transform: scale(1); opacity:1; }
+}
+
+/* Photo */
+.photo-box {
+    width: 160px;
+    height: 160px;
+    margin: 15px auto;
+    border-radius: 50%;
+    border: 3px solid #d4af37;
+    overflow: hidden;
+}
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+.photo-box:hover img {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 0 25px gold;
+}
+
+/* Message */
+#message {
+    width: 100%;
+    height: 140px;
+    border-radius: 16px;
+    padding: 12px;
+    border: 1.5px solid #d4af37;
+    margin-top: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    background: #fff0f5;
+    resize: none;
+}
+
+/* Cake */
+.cake {
+    width: 80px;
+    height: 80px;
+    margin: 20px auto;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCake 5s linear infinite;
+}
+.cake .layer {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background: #ff4081;
+    border-radius: 10px;
+    bottom: 0;
+}
+.cake .layer:nth-child(2) {
+    height: 30px;
+    background: #ff85a2;
+    bottom: 40px;
+}
+.cake .candle {
+    position: absolute;
+    top: -15px;
+    left: 36px;
+    width: 8px;
+    height: 20px;
+    background: #ffd700;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.cake .flame {
+    position: absolute;
+    top: -12px;
+    left: 1px;
+    width: 6px;
+    height: 6px;
+    background: orange;
+    border-radius: 50%;
+    box-shadow: 0 0 10px yellow;
+    animation: flicker 0.3s infinite alternate;
+}
+@keyframes flicker {
+    0% { transform: scale(1); opacity:1; }
+    100% { transform: scale(1.3); opacity:0.8; }
+}
+@keyframes rotateCake {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Balloons */
+.balloon {
+    position: absolute;
+    bottom: -100px;
+    font-size: 2.8rem;
+    animation: floatUp linear infinite;
+    z-index: 1;
+    text-shadow: 0 0 3px #fff;
+}
+@keyframes floatUp {
+    from { transform: translateY(0); opacity:1; }
+    to { transform: translateY(-120vh); opacity:0; }
+}
+
+/* Fireworks */
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: gold;
+    border-radius: 50%;
+    animation: explode 1.4s ease-out forwards;
+}
+@keyframes explode {
+    to { transform: translate(var(--x), var(--y)) scale(0); opacity:0; }
+}
+
+/* Glitter */
+.glitter {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: gold;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkle 2s infinite ease-in-out;
+}
+@keyframes sparkle {
+    0%,100% { opacity:0; transform: scale(0.5); }
+    50% { opacity:1; transform: scale(1.4); }
+}
+
+/* Confetti/Hearts */
+.confetti {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: confettiFall 3s linear forwards;
+}
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity:1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
+}
+
+/* Music button */
+#musicControl {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff85a2;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+}
+</style>
+</head>
+<body>
+
+<!-- Birthday Card -->
+<div id="card" class="card">
+    <h1>Happy Birthday</h1>
+    <h2>Lakshmiii chechiii ✨</h2>
+
+    <!-- Cake -->
+    <div class="cake">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="candle" id="candle"><div class="flame" id="flame"></div></div>
+    </div>
+
+    <!-- Photo -->
+    <div class="photo-box">
+        <img src="photo.jpg">
+    </div>
+
+    <!-- Message -->
+    <textarea id="message" readonly></textarea>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+<button id="musicControl">🎵</button>
+
+<script>
+// ====== Stars ======
+for(let i=0;i<100;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.top=Math.random()*100+"vh";
+    s.style.left=Math.random()*100+"vw";
+    s.style.width=Math.random()*2+1+"px";
+    s.style.height=s.style.width;
+    document.body.appendChild(s);
+}
+
+// ===== Shooting stars =====
+setInterval(()=>{
+    let ss=document.createElement("div");
+    ss.className="shooting-star";
+    ss.style.top=Math.random()*50+"vh";
+    ss.style.left=Math.random()*50+"vw";
+    document.body.appendChild(ss);
+    setTimeout(()=>ss.remove(),2000);
+},5000);
+
+// ===== Balloons =====
+const balloonChars=["🎈","🎂","🎁","🎉","💖"];
+const balloonColors=["#ff5e5e","#ff85a2","#ffd700","#00d4ff","#aaff00"];
+setInterval(()=>{
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.innerText=balloonChars[Math.floor(Math.random()*balloonChars.length)];
+    b.style.left=Math.random()*100+"vw";
+    b.style.color=balloonColors[Math.floor(Math.random()*balloonColors.length)];
+    b.style.animationDuration=(5+Math.random()*4)+"s";
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),9000);
+},800);
+
+// ===== Fireworks =====
+function fireworks(){
+    for(let i=0;i<30;i++){
+        let f=document.createElement("div");
+        f.className="firework";
+        f.style.left="50vw";
+        f.style.top="50vh";
+        f.style.background=`hsl(${Math.random()*50+40},100%,60%)`;
+        f.style.setProperty("--x",(Math.random()*200-100)+"px");
+        f.style.setProperty("--y",(Math.random()*200-100)+"px");
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1400);
+    }
+}
+setInterval(()=>fireworks(),5000);
+
+// ===== Glitter =====
+setInterval(()=>{
+    let g=document.createElement("div");
+    g.className="glitter";
+    g.style.left=Math.random()*100+"vw";
+    g.style.top=Math.random()*100+"vh";
+    g.style.animationDuration=(1.5+Math.random()*2)+"s";
+    document.body.appendChild(g);
+    setTimeout(()=>g.remove(),3000);
+},300);
+
+// ===== Candle Blow Out =====
+const candle=document.getElementById("candle");
+const flame=document.getElementById("flame");
+candle.addEventListener("click",()=>{
+    flame.style.display="none";
+    // Confetti explosion
+    for(let i=0;i<50;i++){
+        let c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=(window.innerWidth/2 + Math.random()*200-100)+"px";
+        c.innerText=["🎉","💖","❤️"][Math.floor(Math.random()*3)];
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+    }
+});
+
+// ===== Music control with fade =====
+const music=document.getElementById("music");
+const musicControl=document.getElementById("musicControl");
+musicControl.addEventListener("click",()=>{
+    if(music.paused){
+        music.volume=0;
+        music.play();
+        musicControl.innerText="🔊";
+        let vol=0;
+        const fade=setInterval(()=>{
+            if(vol<1){vol+=0.02; music.volume=vol;}
+            else clearInterval(fade);
+        },100);
+    } else{
+        music.pause();
+        musicControl.innerText="🎵";
+    }
+});
+
+// ===== Typewriter Message Reveal =====
+const messageText = `Dear Lakshmiii chechi,
+
+May your day be filled with joy, laughter, and love, and may the year ahead bring you success, good health,
+and beautiful moments to cherish. Have a wonderful birthday and an amazing year ahead 🎂💫
+Once again, happy birthday Lakshmiii Chechiii 🎂🎈🫂`;
+
+const msgBox=document.getElementById("message");
+let idx=0;
+
+function typeWriter(){
+    if(idx<messageText.length){
+        msgBox.value += messageText.charAt(idx);
+        idx++;
+        setTimeout(typeWriter,35);
+    }
+}
+
+// ===== Countdown before showing card =====
+document.getElementById("card").style.display="none";
+let count=3;
+const countdownDiv=document.createElement("div");
+countdownDiv.style.position="fixed";
+countdownDiv.style.top="50%";
+countdownDiv.style.left="50%";
+countdownDiv.style.transform="translate(-50%, -50%)";
+countdownDiv.style.fontSize="4rem";
+countdownDiv.style.color="gold";
+countdownDiv.style.textShadow="0 0 10px #fff";
+countdownDiv.style.zIndex="30";
+document.body.appendChild(countdownDiv);
+
+const countdownInterval=setInterval(()=>{
+    countdownDiv.innerText=count;
+    count--;
+    if(count<0){
+        clearInterval(countdownInterval);
+        countdownDiv.remove();
+        document.getElementById("card").style.display="block";
+        typeWriter();
+    }
+},1000);
+
+</script>
+</body>
+</html>
+
